@@ -27,10 +27,6 @@
 
 set -e
 
-install_deps () {
-    pip3 install -Ir /usr/local/foglamp/python/requirements-dht11.txt --no-cache-dir
-}
-
 set_files_ownership () {
     chown -R root:root /usr/local/foglamp/python/foglamp/plugins/south/dht11
 }
@@ -48,7 +44,6 @@ enable_service () {
     echo $output
 }
 
-install_deps
 set_files_ownership
 SERVICE_ID=$(add_service)
 enable_service $SERVICE_ID

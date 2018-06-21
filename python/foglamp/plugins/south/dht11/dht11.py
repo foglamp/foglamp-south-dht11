@@ -23,9 +23,7 @@
 
 
 from datetime import datetime, timezone
-import Adafruit_DHT
 import uuid
-
 
 from foglamp.common import logger
 from foglamp.services.south import exceptions
