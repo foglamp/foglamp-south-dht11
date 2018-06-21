@@ -1,5 +1,5 @@
-======================
-foglamp-south-dht11 Pi
-======================
+================================
+foglamp-south-dht11 Raspberry Pi
+================================
 
 FogLAMP South Plugin for DHT11 (For Raspberry Pi)
