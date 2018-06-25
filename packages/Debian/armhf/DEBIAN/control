@@ -1,5 +1,5 @@
 Package: foglamp-south-dht11
-Version: 1.0
+Version: 1.0.0
 Section: devel
 Priority: optional
 Architecture: armhf 
