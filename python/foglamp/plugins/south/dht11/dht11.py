@@ -18,7 +18,7 @@
     To access the GPIO pins foglamp must be able to access /dev/gpiomem,
     the default access for this is owner and group read/write. Either
     FogLAMP must be added to the group or the permissions altered to
-    allow FogLAMP access to the device.
+    allow FogLAMP access to the sensor.
     """
 
 
@@ -40,7 +40,7 @@ _DEFAULT_CONFIG = {
          'default': 'dht11'
     },
     'pollInterval': {
-        'description': 'The interval between poll calls to the device poll routine expressed in milliseconds.',
+        'description': 'The interval between poll calls to the sensor poll routine expressed in milliseconds.',
         'type': 'integer',
         'default': '1000'
     },
@@ -79,7 +79,7 @@ def plugin_init(config):
     """ Initialise the plugin.
 
     Args:
-        config: JSON configuration document for the device configuration category
+        config: JSON configuration document for the plugin configuration category
     Returns:
         handle: JSON object to be used in future calls to the plugin
     Raises:
@@ -126,7 +126,7 @@ def plugin_poll(handle):
 
 def plugin_reconfigure(handle, new_config):
     """ Reconfigures the plugin, it should be called when the configuration of the plugin is changed during the
-        operation of the device service.
+        operation of the south service.
         The new configuration category should be passed.
 
     Args:
@@ -142,7 +142,7 @@ def plugin_reconfigure(handle, new_config):
 
 
 def plugin_shutdown(handle):
-    """ Shutdowns the plugin doing required cleanup, to be called prior to the device service being shut down.
+    """ Shutdowns the plugin doing required cleanup, to be called prior to the service being shut down.
 
     Args:
         handle: handle returned by the plugin initialisation call
