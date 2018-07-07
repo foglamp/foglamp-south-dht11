@@ -95,7 +95,7 @@ def plugin_poll(handle):
     """
 
     try:
-        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, handle)
+        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, handle['gpiopin']['value'])
         if humidity is not None and temperature is not None:
             time_stamp = str(datetime.now(tz=timezone.utc))
             readings = {'temperature': temperature, 'humidity': humidity}
