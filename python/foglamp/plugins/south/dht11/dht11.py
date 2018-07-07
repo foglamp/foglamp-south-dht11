@@ -105,14 +105,12 @@ def plugin_poll(handle):
                     'key':       str(uuid.uuid4()),
                     'readings':  readings
             }
-            return wrapper
         else:
-            return None
-
-    except Exception as ex:
-        raise exceptions.DataRetrievalError(ex)
-
-    return None
+            raise exceptions.DataRetrievalError
+    except Exception:
+        raise
+    else:
+        return wrapper
 
 
 def plugin_reconfigure(handle, new_config):
