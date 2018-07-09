@@ -27,15 +27,20 @@
 
 set -e
 
+install_deps () {
+    pip3 install -Ir /usr/local/foglamp/python/requirements-dht.txt --no-cache-dir
+}
+
 set_files_ownership () {
     chown -R root:root /usr/local/foglamp/python/foglamp/plugins/south/dht11
 }
 
 add_service () {
-    output=$(curl -sX POST http://localhost:8081/foglamp/service -d '{"name": "DHT 11", "type": "south", "plugin": "dht11", "enabled": true}')
+    output=$(curl -sX POST http://localhost:8081/foglamp/service -d '{"name": "dht11", "type": "south", "plugin": "dht11", "enabled": true}')
     echo $output
 }
 
+# install_deps  # FIXME: https://github.com/adafruit/Adafruit_Python_DHT/issues/99
 set_files_ownership
 add_service
 echo "dht11 plugin installed."

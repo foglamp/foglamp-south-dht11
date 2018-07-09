@@ -4,29 +4,19 @@
 # See: http://foglamp.readthedocs.io/
 # FOGLAMP_END
 
-""" Plugin for a DHT11 temperature and humidity sensor attached directly
-    to the GPIO pins of a Raspberry Pi
-
-    This plugin uses the Adafruit DHT library, to install this perform
-    the following steps:
-
-        git clone https://github.com/adafruit/Adafruit_Python_DHT.git
-        cd Adafruit_Python_DHT
-        sudo apt-get install build-essential python-dev
-        sudo python setup.py install
-
-    To access the GPIO pins foglamp must be able to access /dev/gpiomem,
-    the default access for this is owner and group read/write. Either
-    FogLAMP must be added to the group or the permissions altered to
-    allow FogLAMP access to the sensor.
-    """
-
+""" Plugin for a DHT11 temperature and humidity sensor attached directly to the GPIO pins of a Raspberry Pi. """
 
 from datetime import datetime, timezone
+import copy
 import uuid
+import logging
+
+# TODO: https://github.com/adafruit/Adafruit_Python_DHT/issues/99
+import Adafruit_DHT
 
 from foglamp.common import logger
 from foglamp.services.south import exceptions
+
 
 __author__ = "Mark Riddoch"
 __copyright__ = "Copyright (c) 2017 OSIsoft, LLC"
@@ -54,6 +44,7 @@ _DEFAULT_CONFIG = {
 
 _LOGGER = logger.setup(__name__)
 """ Setup the access to the logging system of FogLAMP """
+_LOGGER.setLevel(logging.INFO)
 
 
 def plugin_info():
@@ -85,7 +76,7 @@ def plugin_init(config):
     Raises:
     """
 
-    handle = config['gpiopin']['value']
+    handle = config
     return handle
 
 
@@ -104,7 +95,7 @@ def plugin_poll(handle):
     """
 
     try:
-        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, handle)
+        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, handle['gpiopin']['value'])
         if humidity is not None and temperature is not None:
             time_stamp = str(datetime.now(tz=timezone.utc))
             readings = {'temperature': temperature, 'humidity': humidity}
@@ -114,14 +105,12 @@ def plugin_poll(handle):
                     'key':       str(uuid.uuid4()),
                     'readings':  readings
             }
-            return wrapper
         else:
-            return None
-
-    except Exception as ex:
-        raise exceptions.DataRetrievalError(ex)
-
-    return None
+            raise exceptions.DataRetrievalError
+    except Exception:
+        raise
+    else:
+        return wrapper
 
 
 def plugin_reconfigure(handle, new_config):
@@ -136,8 +125,11 @@ def plugin_reconfigure(handle, new_config):
         new_handle: new handle to be used in the future calls
     Raises:
     """
+    _LOGGER.info("Old config for DHT11 plugin {} \n new config {}".format(handle, new_config))
 
-    new_handle = new_config['gpiopin']['value']
+    new_handle = copy.deepcopy(handle)
+    new_handle['restart'] = 'no'
+
     return new_handle
 
 
