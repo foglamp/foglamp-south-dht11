@@ -36,7 +36,7 @@ set_files_ownership () {
 }
 
 add_service () {
-    output=$(curl -sX POST http://localhost:8081/foglamp/service -d '{"name": "dht11", "type": "south", "plugin": "dht11", "enabled": true}')
+    output=$(curl -sX POST http://localhost:8081/foglamp/service -d '{"name": "DHT11", "type": "south", "plugin": "dht11", "enabled": true}')
     echo $output
 }
 
