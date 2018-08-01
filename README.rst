@@ -21,15 +21,15 @@ Create Debian Package
 .. code-block:: console
 
     $ ./make_deb help
-    make_deb {arm} [clean|cleanall]
+    make_deb help [clean|cleanall]
     This script is used to create the Debian package of foglamp dht11 plugin
 
     Arguments:
-     arm      - Build an armv7l package
+     help     - Display this help text
      clean    - Remove all the old versions saved in format .XXXX
      cleanall - Remove all the versions, including the last one
 
-``./make_deb arm`` will create the debian package inside ``packages/Debian/build/``.
+``./make_deb`` will create the debian package inside ``packages/build/``.
 
 
 Pre Debian Package Install
@@ -71,8 +71,8 @@ i.e. ``/var/cache/apt/archives``.
 
 .. code-block:: console
 
-  $ sudo cp foglamp-south-dht11-1.0.0-armhf.deb /var/cache/apt/archives/.
-  $ sudo apt install /var/cache/apt/archives/foglamp-south-dht11-1.0.0-armhf.deb
+  $ sudo cp foglamp-south-dht11-1.0.1.deb /var/cache/apt/archives/.
+  $ sudo apt install /var/cache/apt/archives/foglamp-south-dht11-1.0.1.deb
 
 
 Check the newly installed package:
@@ -80,7 +80,7 @@ Check the newly installed package:
 .. code-block:: console
 
   $ sudo dpkg -l | grep foglamp-south-dht11
-
+  ii  foglamp-south-dht11    1.0.1    armhf    South plugin for the DHT1
 
 Check foglamp service status for foglamp-south-dht11, it should list it as a south service:
 
@@ -91,4 +91,5 @@ Check foglamp service status for foglamp-south-dht11, it should list it as a sou
   ...
   CGroup: /system.slice/foglamp.service
            |- ....
-           └─python3 -m foglamp.services.south --port=43927 --address=127.0.0.1 --name=dht11
+           ├─/bin/sh services/south --port=43926 --address=127.0.0.1 --name=DHT11
+           └─python3 -m foglamp.services.south --port=43927 --address=127.0.0.1 --name=DHT11
