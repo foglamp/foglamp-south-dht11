@@ -137,7 +137,7 @@ def plugin_reconfigure(handle, new_config):
     """
     _LOGGER.info("Old config for DHT11 plugin {} \n new config {}".format(handle, new_config))
 
-    new_handle = copy.deepcopy(handle)
+    new_handle = copy.deepcopy(new_config)
     new_handle['restart'] = 'no'
 
     return new_handle
