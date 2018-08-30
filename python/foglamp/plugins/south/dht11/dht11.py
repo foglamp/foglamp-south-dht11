@@ -15,6 +15,7 @@ import logging
 import Adafruit_DHT
 
 from foglamp.common import logger
+from foglamp.plugins.common import utils
 from foglamp.services.south import exceptions
 
 
@@ -25,19 +26,28 @@ __version__ = "${VERSION}"
 
 _DEFAULT_CONFIG = {
     'plugin': {
-         'description': 'Python module name of the plugin to load',
-         'type': 'string',
-         'default': 'dht11'
+        'description': 'Python module name of the plugin to load',
+        'type': 'string',
+        'default': 'dht11',
+        'readonly': 'true'
+    },
+    'assetName': {
+        'description': 'Asset prefix',
+        'type': 'string',
+        'default': "dht11",
+        'order': "1"
     },
     'pollInterval': {
         'description': 'The interval between poll calls to the sensor poll routine expressed in milliseconds.',
         'type': 'integer',
-        'default': '1000'
+        'default': '1000',
+        'order': '2'
     },
     'gpiopin': {
         'description': 'The GPIO pin into which the DHT11 data pin is connected', 
         'type': 'integer',
-        'default': '4'
+        'default': '4',
+        'order': '3'
     }
 
 }
@@ -97,10 +107,10 @@ def plugin_poll(handle):
     try:
         humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, handle['gpiopin']['value'])
         if humidity is not None and temperature is not None:
-            time_stamp = str(datetime.now(tz=timezone.utc))
+            time_stamp = utils.local_timestamp()
             readings = {'temperature': temperature, 'humidity': humidity}
             wrapper = {
-                    'asset':     'dht11',
+                    'asset':     handle['assetName']['value'],
                     'timestamp': time_stamp,
                     'key':       str(uuid.uuid4()),
                     'readings':  readings
@@ -127,7 +137,7 @@ def plugin_reconfigure(handle, new_config):
     """
     _LOGGER.info("Old config for DHT11 plugin {} \n new config {}".format(handle, new_config))
 
-    new_handle = copy.deepcopy(handle)
+    new_handle = copy.deepcopy(new_config)
     new_handle['restart'] = 'no'
 
     return new_handle
