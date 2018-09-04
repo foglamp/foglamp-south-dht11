@@ -32,7 +32,7 @@ _DEFAULT_CONFIG = {
         'readonly': 'true'
     },
     'assetName': {
-        'description': 'Asset prefix',
+        'description': 'Asset name',
         'type': 'string',
         'default': "dht11",
         'order': "1"
