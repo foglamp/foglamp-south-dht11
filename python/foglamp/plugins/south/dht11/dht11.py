@@ -86,7 +86,7 @@ def plugin_init(config):
     Raises:
     """
 
-    handle = config
+    handle = copy.deepcopy(config)
     return handle
 
 
