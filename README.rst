@@ -21,15 +21,14 @@ Create Debian Package
 .. code-block:: console
 
     $ ./make_deb help
-    make_deb {arm} [clean|cleanall]
+    make_deb [clean|cleanall]
     This script is used to create the Debian package of foglamp dht11 plugin
 
     Arguments:
-     arm      - Build an armv7l package
      clean    - Remove all the old versions saved in format .XXXX
      cleanall - Remove all the versions, including the last one
 
-``./make_deb arm`` will create the debian package inside ``packages/Debian/build/``.
+``./make_deb `` will create the debian package inside ``packages/Debian/build/``.
 
 
 Pre Debian Package Install
