@@ -151,4 +151,4 @@ def plugin_shutdown(handle):
     Returns:
     Raises:
     """
-    pass
+    _LOGGER.info("DHT11 Poll plugin shutdown")
