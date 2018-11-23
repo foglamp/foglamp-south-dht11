@@ -32,7 +32,7 @@ _DEFAULT_CONFIG = {
         'readonly': 'true'
     },
     'assetName': {
-        'description': 'Asset prefix',
+        'description': 'Asset name',
         'type': 'string',
         'default': "dht11",
         'order': "1"
@@ -86,7 +86,7 @@ def plugin_init(config):
     Raises:
     """
 
-    handle = config
+    handle = copy.deepcopy(config)
     return handle
 
 
