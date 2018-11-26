@@ -86,7 +86,7 @@ def plugin_init(config):
     Raises:
     """
 
-    handle = config
+    handle = copy.deepcopy(config)
     return handle
 
 
@@ -151,4 +151,4 @@ def plugin_shutdown(handle):
     Returns:
     Raises:
     """
-    pass
+    _LOGGER.info("DHT11 Poll plugin shutdown")
