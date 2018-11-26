@@ -20,6 +20,14 @@
 ##
 
 set -e
+plugin_type="south"
+plugin_name="dht11"
+
+usage="$(basename "$0") [clean|cleanall]
+This script is used to create the Debian package of FogLAMP '${plugin_name}' ${plugin_type} plugin
+Arguments: 
+ clean    - Remove all the old versions saved in format .XXXX
+ cleanall - Remove all the versions, including the last one"
 
 GIT_ROOT=`pwd`    # The script must be executed from the root git directory
 for i in "$@"
