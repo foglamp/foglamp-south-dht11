@@ -26,7 +26,7 @@ __version__ = "${VERSION}"
 
 _DEFAULT_CONFIG = {
     'plugin': {
-        'description': 'Python module name of the plugin to load',
+        'description': 'DHT11 South Plugin',
         'type': 'string',
         'default': 'dht11',
         'readonly': 'true'
@@ -35,19 +35,22 @@ _DEFAULT_CONFIG = {
         'description': 'Asset name',
         'type': 'string',
         'default': "dht11",
-        'order': "1"
+        'order': "1",
+        'displayName': 'Asset Name'
     },
     'pollInterval': {
         'description': 'The interval between poll calls to the sensor poll routine expressed in milliseconds.',
         'type': 'integer',
         'default': '1000',
-        'order': '2'
+        'order': '2',
+        'displayName': 'Poll Interval'
     },
-    'gpiopin': {
+    'gpioPin': {
         'description': 'The GPIO pin into which the DHT11 data pin is connected', 
         'type': 'integer',
         'default': '4',
-        'order': '3'
+        'order': '3',
+        'displayName': 'GPIO Pin'
     }
 
 }
@@ -105,7 +108,7 @@ def plugin_poll(handle):
     """
 
     try:
-        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, handle['gpiopin']['value'])
+        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, handle['gpioPin']['value'])
         if humidity is not None and temperature is not None:
             time_stamp = utils.local_timestamp()
             readings = {'temperature': temperature, 'humidity': humidity}

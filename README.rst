@@ -28,7 +28,7 @@ Create Debian Package
      clean    - Remove all the old versions saved in format .XXXX
      cleanall - Remove all the versions, including the last one
 
-``./make_deb `` will create the debian package inside ``packages/Debian/build/``.
+``./make_deb`` will create the debian package inside ``packages/build/``.
 
 
 Pre Debian Package Install
