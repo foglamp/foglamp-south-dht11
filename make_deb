@@ -71,7 +71,7 @@ architecture="armhf"
 
 version=`cat ${GIT_ROOT}/VERSION.south.dht11 | tr -d ' ' | grep 'foglamp_south_dht11_version=' | head -1 | sed -e 's/\(.*\)=\(.*\)/\2/g'`
 foglamp_version=`cat ${GIT_ROOT}/VERSION.south.dht11 | tr -d ' ' | grep 'foglamp_version' | head -1 | sed -e 's/\(.*\)version\(.*\)/\2/g'`
-BUILD_ROOT="${GIT_ROOT}/packages/Debian/build"
+BUILD_ROOT="${GIT_ROOT}/packages/build"
 
 # Final package name
 package_name="foglamp-south-dht11-${version}-${architecture}"
