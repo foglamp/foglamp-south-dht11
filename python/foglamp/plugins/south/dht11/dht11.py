@@ -20,7 +20,7 @@ from foglamp.services.south import exceptions
 
 
 __author__ = "Mark Riddoch"
-__copyright__ = "Copyright (c) 2017 OSIsoft, LLC"
+__copyright__ = "Copyright (c) 2018 Dianomic Systems"
 __license__ = "Apache 2.0"
 __version__ = "${VERSION}"
 
@@ -37,13 +37,6 @@ _DEFAULT_CONFIG = {
         'default': "dht11",
         'order': "1",
         'displayName': 'Asset Name'
-    },
-    'pollInterval': {
-        'description': 'The interval between poll calls to the sensor poll routine expressed in milliseconds.',
-        'type': 'integer',
-        'default': '1000',
-        'order': '2',
-        'displayName': 'Poll Interval'
     },
     'gpioPin': {
         'description': 'The GPIO pin into which the DHT11 data pin is connected', 
@@ -141,8 +134,6 @@ def plugin_reconfigure(handle, new_config):
     _LOGGER.info("Old config for DHT11 plugin {} \n new config {}".format(handle, new_config))
 
     new_handle = copy.deepcopy(new_config)
-    new_handle['restart'] = 'no'
-
     return new_handle
 
 

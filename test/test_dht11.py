@@ -9,7 +9,7 @@ import pytest
 from python.foglamp.plugins.south.dht11 import dht11
 
 __author__ = "Praveen Garg"
-__copyright__ = "Copyright (c) 2017 OSIsoft, LLC"
+__copyright__ = "Copyright (c) 2018 Dianomic Systems"
 __license__ = "Apache 2.0"
 __version__ = "${VERSION}"
 
