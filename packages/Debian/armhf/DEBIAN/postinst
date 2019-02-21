@@ -35,6 +35,6 @@ set_files_ownership () {
     chown -R root:root /usr/local/foglamp/python/foglamp/plugins/south/dht11
 }
 
-# install_deps  # FIXME: https://github.com/adafruit/Adafruit_Python_DHT/issues/99
+install_deps
 set_files_ownership
 echo "dht11 plugin installed."
