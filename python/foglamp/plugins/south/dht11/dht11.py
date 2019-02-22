@@ -15,29 +15,35 @@ import logging
 import Adafruit_DHT
 
 from foglamp.common import logger
+from foglamp.plugins.common import utils
 from foglamp.services.south import exceptions
 
 
 __author__ = "Mark Riddoch"
-__copyright__ = "Copyright (c) 2017 OSIsoft, LLC"
+__copyright__ = "Copyright (c) 2018 Dianomic Systems"
 __license__ = "Apache 2.0"
 __version__ = "${VERSION}"
 
 _DEFAULT_CONFIG = {
     'plugin': {
-         'description': 'Python module name of the plugin to load',
-         'type': 'string',
-         'default': 'dht11'
+        'description': 'DHT11 South Plugin',
+        'type': 'string',
+        'default': 'dht11',
+        'readonly': 'true'
     },
-    'pollInterval': {
-        'description': 'The interval between poll calls to the sensor poll routine expressed in milliseconds.',
-        'type': 'integer',
-        'default': '1000'
+    'assetName': {
+        'description': 'Asset name',
+        'type': 'string',
+        'default': "dht11",
+        'order': "1",
+        'displayName': 'Asset Name'
     },
-    'gpiopin': {
+    'gpioPin': {
         'description': 'The GPIO pin into which the DHT11 data pin is connected', 
         'type': 'integer',
-        'default': '4'
+        'default': '4',
+        'order': '3',
+        'displayName': 'GPIO Pin'
     }
 
 }
@@ -58,7 +64,7 @@ def plugin_info():
 
     return {
         'name': 'DHT11 GPIO',
-        'version': '1.0',
+        'version': '1.5.0',
         'mode': 'poll',
         'type': 'south',
         'interface': '1.0',
@@ -76,7 +82,7 @@ def plugin_init(config):
     Raises:
     """
 
-    handle = config
+    handle = copy.deepcopy(config)
     return handle
 
 
@@ -95,12 +101,12 @@ def plugin_poll(handle):
     """
 
     try:
-        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, handle['gpiopin']['value'])
+        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, handle['gpioPin']['value'])
         if humidity is not None and temperature is not None:
-            time_stamp = str(datetime.now(tz=timezone.utc))
+            time_stamp = utils.local_timestamp()
             readings = {'temperature': temperature, 'humidity': humidity}
             wrapper = {
-                    'asset':     'dht11',
+                    'asset':     handle['assetName']['value'],
                     'timestamp': time_stamp,
                     'key':       str(uuid.uuid4()),
                     'readings':  readings
@@ -127,9 +133,7 @@ def plugin_reconfigure(handle, new_config):
     """
     _LOGGER.info("Old config for DHT11 plugin {} \n new config {}".format(handle, new_config))
 
-    new_handle = copy.deepcopy(handle)
-    new_handle['restart'] = 'no'
-
+    new_handle = copy.deepcopy(new_config)
     return new_handle
 
 
@@ -141,4 +145,4 @@ def plugin_shutdown(handle):
     Returns:
     Raises:
     """
-    pass
+    _LOGGER.info("DHT11 Poll plugin shutdown")
