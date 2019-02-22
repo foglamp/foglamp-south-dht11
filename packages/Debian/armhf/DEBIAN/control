@@ -3,7 +3,7 @@ Version: 1.0.0
 Section: devel
 Priority: optional
 Architecture: armhf 
-Depends: build-essential,python3-dev,foglamp
+Depends: foglamp,wiringpi
 Conflicts:
 Maintainer: Dianomic Systems, Inc. <info@dianomic.com>
 Homepage: http://www.dianomic.com
