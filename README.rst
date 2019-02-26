@@ -13,7 +13,7 @@ A DHT11 plugged directly into the GPIO pins of a Raspberry Pi, the default confi
 
 Installation
 ============
-On Rpi the packages can be installed with given `requirements.sh <requirements.sh>`_ or with below manual steps:
+The plugin can be installed with given `requirements.sh <requirements.sh>`_ or with below manual steps:
 
 
 .. code-block:: bash
