@@ -8,12 +8,18 @@ FogLAMP South Plugin for DHT11 temperature and humidity sensor, for Raspberry Pi
 Hardware
 ========
 
-A DHT11 pluged directly into the GPIO pins of a Raspberry Pi, the default configuration is to use GPIO4 for the data.
+A DHT11 plugged directly into the GPIO pins of a Raspberry Pi, the default configuration is to use GPIO4 for the data.
 
 
 Installation
 ============
+On Rpi the packages can be installed with given `requirements.sh <requirements.sh>`_ or with below manual steps:
 
+
+.. code-block:: bash
+
+   $ sudo apt install -y wiringpi
+   $ pip3 install -Ir python/requirements-dht.txt --no-cache-dir
 
 Create Debian Package
 ~~~~~~~~~~~~~~~~~~~~~
@@ -29,23 +35,6 @@ Create Debian Package
      cleanall - Remove all the versions, including the last one
 
 ``./make_deb`` will create the debian package inside ``packages/build/``.
-
-
-Pre Debian Package Install
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This plugin uses the Adafruit_Python_DHT python package. There is a known issue with pip package.
-
-https://github.com/adafruit/Adafruit_Python_DHT/issues/99
-
-Hence to install this, perform the following steps:
-
-.. code-block:: bash
-
-   git clone https://github.com/adafruit/Adafruit_Python_DHT.git
-   cd Adafruit_Python_DHT
-   sudo apt-get install build-essential python3-dev
-   sudo python3 setup.py install
 
 
 Sensor GPIO access
