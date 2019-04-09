@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 ##--------------------------------------------------------------------
-## Copyright (c) 2018 Dianomic Systems
+## Copyright (c) 2019 Dianomic Systems
 ##
 ## Licensed under the Apache License, Version 2.0 (the "License");
 ## you may not use this file except in compliance with the License.
@@ -16,25 +16,11 @@
 ## limitations under the License.
 ##--------------------------------------------------------------------
 
-##--------------------------------------------------------------------
 ##
-## @postinst DEBIAN/postinst
-## This script is used to execute post installation tasks.
+## Author: Ashish Jabble
 ##
-## Author: Ivan Zoratti, Praveen Garg
-##
-##--------------------------------------------------------------------
 
 set -e
 
-install_deps () {
-    pip3 install -Ir /usr/local/foglamp/python/requirements-dht.txt --no-cache-dir
-}
-
-set_files_ownership () {
-    chown -R root:root /usr/local/foglamp/python/foglamp/plugins/south/dht11
-}
-
-install_deps
-set_files_ownership
-echo "dht11 plugin installed."
+sudo apt install -y wiringpi
+pip3 install -Ir python/requirements-dht.txt --no-cache-dir
