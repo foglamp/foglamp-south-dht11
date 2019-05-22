@@ -61,13 +61,18 @@ do
 done
 
 
-# If the architecture has not been defined, then the script is complete
-if [ "$(dpkg --print-architecture)" != "armhf" ]; then
-  echo "Package building is only supported on armhf architecture!!"
-  exit 0
-fi
+architecture="$(dpkg --print-architecture)"
 
-architecture="armhf"
+case "${architecture}" in
+	arm64)
+		;;
+	armhf)
+		;;
+	*)
+		echo "Package building is only supported on arm architectures!!"
+		exit 0
+		;;
+esac
 
 version=`cat ${GIT_ROOT}/VERSION.south.dht11 | tr -d ' ' | grep 'foglamp_south_dht11_version=' | head -1 | sed -e 's/\(.*\)=\(.*\)/\2/g'`
 foglamp_version=`cat ${GIT_ROOT}/VERSION.south.dht11 | tr -d ' ' | grep 'foglamp_version' | head -1 | sed -e 's/\(.*\)version\(.*\)/\2/g'`
