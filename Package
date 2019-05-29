@@ -8,25 +8,24 @@ plugin_install_dirname=${plugin_name}
 #   1. Generic packages we depend on in all architectures and package managers
 #   2. Architecture specific packages we depend on
 #   3. Package manager specific packages we depend on
-requirements="foglamp,wiringpi"
+requirements="foglamp"
 
 case "$arch" in
-	x86_64)
-		;;
-	armhf)
-		;;
-	aarch64)
-		;;
+    x86_64)
+        echo "${plugin_name} is not supported on Intel architectures as it requires ARM GPIO support"
+        exit 1
+        ;;
+    armv7l)
+        requirements="${requirements},wiringpi"
+        ;;
+    aarch64)
+        ;;
 esac
 case "$package_manager" in
-	deb)
-	    if [ "$arch" != "armhf" ]; then
-	        echo "Deb Package building for ${plugin_name} is only supported on armhf architecture!!"
-	        exit 0
-        fi
+    deb)
         ;;
-	rpm)
-	    echo "RPM Package building for ${plugin_name} is not supported on $arch architecture!!"
-	    exit 0
-	    ;;
+    rpm)
+        echo "RPM Package building for ${plugin_name} is not supported on $arch architecture!!"
+        exit 0
+        ;;
 esac
