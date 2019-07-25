@@ -16,7 +16,7 @@ case "$arch" in
         exit 1
         ;;
     armv7l)
-        requirements="${requirements},wiringpi"
+        requirements="${requirements}"
         ;;
     aarch64)
         ;;

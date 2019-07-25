@@ -18,7 +18,6 @@ The plugin can be installed with given `requirements.sh <requirements.sh>`_ or w
 
 .. code-block:: bash
 
-   $ sudo apt install -y wiringpi
    $ pip3 install -Ir python/requirements-dht11.txt --no-cache-dir
 
 
