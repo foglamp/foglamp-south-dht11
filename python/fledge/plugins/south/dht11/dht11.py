@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# FOGLAMP_BEGIN
-# See: http://foglamp.readthedocs.io/
-# FOGLAMP_END
+# FLEDGE_BEGIN
+# See: http://fledge.readthedocs.io/
+# FLEDGE_END
 
 """ Plugin for a DHT11 temperature and humidity sensor attached directly to the GPIO pins of a Raspberry Pi. """
 
@@ -14,9 +14,9 @@ import logging
 # TODO: https://github.com/adafruit/Adafruit_Python_DHT/issues/99
 import Adafruit_DHT
 
-from foglamp.common import logger
-from foglamp.plugins.common import utils
-from foglamp.services.south import exceptions
+from fledge.common import logger
+from fledge.plugins.common import utils
+from fledge.services.south import exceptions
 
 
 __author__ = "Mark Riddoch"
@@ -49,7 +49,7 @@ _DEFAULT_CONFIG = {
 }
 
 _LOGGER = logger.setup(__name__)
-""" Setup the access to the logging system of FogLAMP """
+""" Setup the access to the logging system of Fledge """
 _LOGGER.setLevel(logging.INFO)
 
 

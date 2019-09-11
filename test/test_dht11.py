@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-# FOGLAMP_BEGIN
-# See: http://foglamp.readthedocs.io/
-# FOGLAMP_END
+# FLEDGE_BEGIN
+# See: http://fledge.readthedocs.io/
+# FLEDGE_END
 
 import pytest
 
-from python.foglamp.plugins.south.dht11 import dht11
+from python.fledge.plugins.south.dht11 import dht11
 
 __author__ = "Praveen Garg"
 __copyright__ = "Copyright (c) 2018 Dianomic Systems"

@@ -1,8 +1,8 @@
 ==================================
-foglamp-south-dht11 (Raspberry Pi)
+fledge-south-dht11 (Raspberry Pi)
 ==================================
 
-FogLAMP South Plugin for DHT11 temperature and humidity sensor, for Raspberry Pi.
+Fledge South Plugin for DHT11 temperature and humidity sensor, for Raspberry Pi.
 
 
 Hardware
@@ -24,5 +24,5 @@ The plugin can be installed with given `requirements.sh <requirements.sh>`_ or w
 Sensor GPIO access
 ~~~~~~~~~~~~~~~~~~
 
-To access the GPIO pins foglamp must be able to access ``/dev/gpiomem``, the default access for this is owner and group read/write.
-Either FogLAMP must be added to the group or the permissions altered to allow FogLAMP access to the sensor.
+To access the GPIO pins fledge must be able to access ``/dev/gpiomem``, the default access for this is owner and group read/write.
+Either Fledge must be added to the group or the permissions altered to allow Fledge access to the sensor.
