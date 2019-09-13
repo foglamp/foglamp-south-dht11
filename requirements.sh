@@ -22,5 +22,4 @@
 
 set -e
 
-sudo apt install -y wiringpi
-pip3 install -Ir python/requirements-dht.txt --no-cache-dir
+pip3 install -Ir python/requirements-dht11.txt --no-cache-dir
