@@ -64,7 +64,7 @@ def plugin_info():
 
     return {
         'name': 'DHT11 GPIO',
-        'version': '1.5.0',
+        'version': '1.7.0',
         'mode': 'poll',
         'type': 'south',
         'interface': '1.0',
