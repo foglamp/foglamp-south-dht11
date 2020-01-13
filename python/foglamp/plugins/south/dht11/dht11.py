@@ -8,7 +8,6 @@
 
 from datetime import datetime, timezone
 import copy
-import uuid
 import logging
 
 # TODO: https://github.com/adafruit/Adafruit_Python_DHT/issues/99
@@ -108,7 +107,6 @@ def plugin_poll(handle):
             wrapper = {
                     'asset':     handle['assetName']['value'],
                     'timestamp': time_stamp,
-                    'key':       str(uuid.uuid4()),
                     'readings':  readings
             }
         else:
